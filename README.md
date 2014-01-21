@@ -12,6 +12,18 @@ well with the [suspend](https://github.com/jmar777/suspend) library.
 npm install typescript-yield
 ```
 
+### Example
+
+```
+var async = require('suspend').async;
+
+var foo = async(function(param: boolean): boolean {
+	return true;
+});
+
+var a: boolean = yield(foo(true), resume());
+```
+
 ### Definition file preparation
 - find all callback and promise async functions
 - refactor callback param value to be function's return value
