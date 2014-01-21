@@ -9,6 +9,7 @@
 		"coffee-script": "*",
 		"mocha": "*"
 	},
+	"repository": "git@github.com:TobiaszCudnik/typescript-yield.git",
 	"main": "build/ts-yield.ts",
   "maintainers": [
     {
