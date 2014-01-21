@@ -6,8 +6,8 @@
     "typescript", "yield", "generators", "async"
   ],
 	"devDependencies": {
-		"coffee-script": "*",
-		"mocha": "*"
+		"coffee-script": "latest",
+		"mocha": "latest"
 	},
 	"repository": "git@github.com:TobiaszCudnik/typescript-yield.git",
 	"main": "build/ts-yield.js",
