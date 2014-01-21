@@ -10,7 +10,7 @@
 		"mocha": "*"
 	},
 	"repository": "git@github.com:TobiaszCudnik/typescript-yield.git",
-	"main": "build/ts-yield.ts",
+	"main": "build/ts-yield.js",
   "maintainers": [
     {
       "name": "Tobiasz Cudnik",
