@@ -8,7 +8,8 @@
 	"devDependencies": {
 		"coffee-script": "1.6.3",
 		"mocha": "latest",
-		"chai": "latest"
+		"chai": "latest",
+		"suspend": "latest"
 	},
 	"repository": "git@github.com:TobiaszCudnik/typescript-yield.git",
 	"main": "build/ts-yield.js",

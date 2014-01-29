@@ -15,6 +15,7 @@ declare module suspend {
 	export function async<F>(fn: F): F;
 }
 
+// CommonJS version
 declare module 'suspend' {
 	export = suspend;
 }
