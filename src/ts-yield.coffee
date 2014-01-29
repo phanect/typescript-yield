@@ -28,9 +28,9 @@ unwrapYield = (input) ->
 				pos_end = i-1
 				break
 		# copy the yielded value, without the fake-yield closing parenthesis
-		output += input.slice pos + 6, pos_last_comma - 1
+		output += input.slice pos + 6, pos_last_comma
 		# copy the generator callback
-		output += input.slice pos_last_comma, pos_end
+		output += input.slice pos_last_comma, pos_end - 1
 		
 	# copy rest of the input string
 	output += input.slice pos_end
@@ -60,7 +60,6 @@ markGenerators = (input) ->
 					level++
 				
 				if level is -1
-					console.log "search_fuction"
 					search_fuction = yes
 					
 				# TODO optimize
@@ -75,7 +74,6 @@ markGenerators = (input) ->
 
 		# TODO check if the function is already a generator
 		if double_yield
-			console.log "double_yield"
 			output += input.slice pos_previous, pos
 		else 
 			output += input.slice pos_previous, pos_end

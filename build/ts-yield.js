@@ -33,8 +33,8 @@ Transforms `yield(foo(params), resume())` into `yield foo(params, resume())`
           break;
         }
       }
-      output += input.slice(pos + 6, pos_last_comma - 1);
-      output += input.slice(pos_last_comma, pos_end);
+      output += input.slice(pos + 6, pos_last_comma);
+      output += input.slice(pos_last_comma, pos_end - 1);
     }
     output += input.slice(pos_end);
     return output;
@@ -65,7 +65,6 @@ Transforms `yield(foo(params), resume())` into `yield foo(params, resume())`
             level++;
           }
           if (level === -1) {
-            console.log("search_fuction");
             search_fuction = true;
           }
           if ((input.slice(i, i + 6)) === 'yield ') {
@@ -82,7 +81,6 @@ Transforms `yield(foo(params), resume())` into `yield foo(params, resume())`
         }
       }
       if (double_yield) {
-        console.log("double_yield");
         output += input.slice(pos_previous, pos);
       } else {
         output += input.slice(pos_previous, pos_end);

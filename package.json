@@ -1,13 +1,14 @@
 {
   "name": "typescript-yield",
   "description": "Transpiler that helps using the ES6 yield statement in TypeScript today",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "keywords": [
     "typescript", "yield", "generators", "async"
   ],
 	"devDependencies": {
-		"coffee-script": "latest",
-		"mocha": "latest"
+		"coffee-script": "1.6.3",
+		"mocha": "latest",
+		"chai": "latest"
 	},
 	"repository": "git@github.com:TobiaszCudnik/typescript-yield.git",
 	"main": "build/ts-yield.js",

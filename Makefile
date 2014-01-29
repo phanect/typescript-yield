@@ -1,7 +1,17 @@
 build:
-	node_modules/.bin/coffee -c -o build src/*.coffee
+	node_modules/.bin/coffee -co build src/*.coffee
+	
+build-watch:
+	node_modules/.bin/coffee  -cwo build src/*.coffee
 	
 test:
-	node_modules/.bin/mocha test
+	node_modules/.bin/mocha \
+		--compilers coffee:coffee-script \
+		--reporter spec \
+		test
+		
+example:
+	tsc example/example.ts \
+		--module CommonJS
 	
-.PHONY: build
+.PHONY: build test example
