@@ -1,7 +1,7 @@
 {
   "name": "typescript-yield",
   "description": "Transpiler that helps using the ES6 yield statement in TypeScript today",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "keywords": [
     "typescript", "yield", "generators", "async"
   ],
