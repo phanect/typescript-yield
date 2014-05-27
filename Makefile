@@ -10,8 +10,11 @@ test:
 		--reporter spec \
 		test
 		
-example:
-	tsc example/example.ts \
+example-compile:
+	tsc example/src/example.ts \
 		--module CommonJS
+		
+example-fix-yields:
+	cd example/src && ../../bin/ts-yield example.js -o ../build
 	
 .PHONY: build test example

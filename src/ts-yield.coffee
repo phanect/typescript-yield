@@ -1,52 +1,37 @@
-#!/usr/bin/env node --harmony
-
 funcs = require './functions'
+path = require 'path'
+fs = require 'fs'
 params = require 'commander'
-glob = require 'glob'
-suspend = require 'suspend'
-go = suspend.resume
-assert = require 'assert'
+writestreamp = require 'writestreamp'
 
 params
 	# TODO read version from package.json
 	.version('0.2.1')
-  .usage('-i <src> [-o <dir>')
-	.option('-i, --source <src>', 
-		'Input file or directory')
+  .usage('-o <dir> source1 [ source2 ]')
+  .option('-w, --watch', 'Watch for file changes')
 	.option('-o, --output-dir <dir>', 
 		'Output directory for the built files (required)')
 	.parse(process.argv)
 
-if not params.sourceDir or not params.buildDir 
-	return params.help()
+if not params.outputDir
+  params.help()
 
-if params.yield and params.pack 
-	return params.help()
+params.args.forEach (source) ->
 
-main = suspend ->
-	# TODO doesnt glob subdirs?
-	files = yield glob '**/*.coffee', {cwd: params.sourceDir}, go()
-	assert files.length, "No files to precess found"
-	builder = new Builder files, params.sourceDir, params.buildDir, params.pack,
-		params.yield
-	
-	# run
+	file = path.join process.cwd(), source
+	target = path.join params.outputDir or process.cwd(), source
+  
+	exec = (curr, prev) ->
+		fs.readFile file, encoding: 'utf8', (arr, content) ->
+			content = funcs.unwrapYield content
+			content = funcs.markGenerators content
+			destination = writestreamp target
+			destination.write content, destination.end.bind destination
+
+	# TODO locks map
 	if params.watch
-		yield builder.watch go()
-	else 
-		yield builder.build go()
-		console.log "Compilation completed"
-		
-main()
-
-###
-TODO
-  var files input
-	watch files
-  watch definitions
-  flowless restart (clock)
-  ...
-  typescript service integration? (via memory, not just files)
-  merge command line tools directly to this event loop
-  watch changes throttling support
-###
+		# TODO use fs.watch when stable
+		fs.watchFile file, persistent: yes, interval: 500, exec
+		exec()
+	else
+		exec()

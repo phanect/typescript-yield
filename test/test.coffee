@@ -1,5 +1,5 @@
 {expect} = require 'chai'
-{markGenerators, unwrapYield} = require '../src/ts-yield.coffee'
+{markGenerators, unwrapYield} = require '../src/functions.coffee'
 
 input1 = """
 /// <reference path="yield.d.ts"/>

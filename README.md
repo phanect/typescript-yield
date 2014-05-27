@@ -12,6 +12,11 @@ well with the [suspend](https://github.com/jmar777/suspend) library.
 npm install typescript-yield
 ```
 
+### Usage
+```
+ts-yield -o build src/**.js
+```
+
 ### Example
 
 ```
@@ -24,10 +29,15 @@ var foo = async(function(param: boolean): boolean {
 var a: boolean = yield(foo(true), resume());
 ```
 
+See `make example-fix-yield`.
+
 ### Definition file preparation
 - find all callback and promise async functions
 - refactor callback param value to be function's return value
 - refactor promise generic type to be function's return value
 
 ### Limitations
-- dont use yield anywhere else in the codebase! (like strings)
+- dont use "yield" anywhere else in the codebase! (like strings)
+
+### TODO
+- rewrite to jsfmt?
