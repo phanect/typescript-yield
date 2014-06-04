@@ -1,4 +1,4 @@
-/// <reference path="../d.ts/suspend.d.ts"/>
+/// <reference path="../../d.ts/suspend.d.ts"/>
 
 // Real declaration, with a callback.
 declare function bar(param: boolean, 
