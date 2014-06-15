@@ -23,15 +23,17 @@
     file = path.join(process.cwd(), source);
     target = path.join(params.outputDir || process.cwd(), source);
     exec = function(curr, prev) {
-      return fs.readFile(file, {
-        encoding: 'utf8'
-      }, function(arr, content) {
-        var destination;
-        content = funcs.unwrapYield(content);
-        content = funcs.markGenerators(content);
-        destination = writestreamp(target);
-        return destination.write(content, destination.end.bind(destination));
-      });
+      if (fs.statSync(file).isFile()) {
+        return fs.readFile(file, {
+          encoding: 'utf8'
+        }, function(arr, content) {
+          var destination;
+          content = funcs.unwrapYield(content);
+          content = funcs.markGenerators(content);
+          destination = writestreamp(target);
+          return destination.write(content, destination.end.bind(destination));
+        });
+      }
     };
     if (params.watch) {
       fs.watchFile(file, {

@@ -22,11 +22,12 @@ params.args.forEach (source) ->
 	target = path.join params.outputDir or process.cwd(), source
   
 	exec = (curr, prev) ->
-		fs.readFile file, encoding: 'utf8', (arr, content) ->
-			content = funcs.unwrapYield content
-			content = funcs.markGenerators content
-			destination = writestreamp target
-			destination.write content, destination.end.bind destination
+		if fs.statSync(file).isFile()
+			fs.readFile file, encoding: 'utf8', (arr, content) ->
+				content = funcs.unwrapYield content
+				content = funcs.markGenerators content
+				destination = writestreamp target
+				destination.write content, destination.end.bind destination
 
 	# TODO locks map
 	if params.watch
