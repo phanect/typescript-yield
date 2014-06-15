@@ -16,23 +16,33 @@ params
 if not params.outputDir
   params.help()
 
-params.args.forEach (source) ->
+compile = (files, cwd, out) ->
+	files.forEach (source) ->
+		file = path.join cwd, source
+		target = path.join out, source
+	
+		exec = (curr, prev) ->
+			stats = fs.statSync file
+			if stats.isFile()
+				fs.readFile file, encoding: 'utf8', (arr, content) ->
+					content = funcs.unwrapYield content
+					content = funcs.markGenerators content
+					destination = writestreamp target
+					destination.write content, destination.end.bind destination
+			else if stats.isDirectory()
+				files_in_dir = fs.readdirSync(file)
+				o = path.join out, source
 
-	file = path.join process.cwd(), source
-	target = path.join params.outputDir or process.cwd(), source
-  
-	exec = (curr, prev) ->
-		if fs.statSync(file).isFile()
-			fs.readFile file, encoding: 'utf8', (arr, content) ->
-				content = funcs.unwrapYield content
-				content = funcs.markGenerators content
-				destination = writestreamp target
-				destination.write content, destination.end.bind destination
+				compile(files_in_dir, file, o)
 
-	# TODO locks map
-	if params.watch
-		# TODO use fs.watch when stable
-		fs.watchFile file, persistent: yes, interval: 500, exec
-		exec()
-	else
-		exec()
+		# TODO locks map
+		if params.watch
+			# TODO use fs.watch when stable
+			fs.watchFile file, persistent: yes, interval: 500, exec
+			exec()
+		else
+			exec()
+
+cwd = process.cwd()
+out = params.outputDir or cwd
+compile params.args, cwd, out
