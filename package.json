@@ -6,12 +6,14 @@
     "typescript", "yield", "generators", "async"
   ],
 	"directories": {"bin": "bin/"},
+	"dependencies": {
+		"commander": "2.2.0",
+		"writestreamp": "0.1.0"
+	},
 	"devDependencies": {
 		"coffee-script": "1.6.3",
 		"mocha": "latest",
-		"chai": "latest",
-		"writestreamp": "latest",
-		"commander": "latest"
+		"chai": "latest"
 	},
 	"repository": "git@github.com:TobiaszCudnik/typescript-yield.git",
 	"main": "build/ts-yield.js",
