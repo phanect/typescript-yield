@@ -10,11 +10,8 @@ params
   .usage('-o <dir> source1 [ source2 ]')
   .option('-w, --watch', 'Watch for file changes')
 	.option('-o, --output-dir <dir>', 
-		'Output directory for the built files (required)')
+		'Output directory for the built files')
 	.parse(process.argv)
-
-if not params.outputDir
-  params.help()
 
 compile = (files, cwd, out) ->
 	files.forEach (source) ->
