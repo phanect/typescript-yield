@@ -7,8 +7,8 @@ writestreamp = require 'writestreamp'
 params
 	# TODO read version from package.json
 	.version('0.2.1')
-  .usage('-o <dir> source1 [ source2 ]')
-  .option('-w, --watch', 'Watch for file changes')
+	.usage('-o <dir> source1 [ source2 ]')
+	.option('-w, --watch', 'Watch for file changes')
 	.option('-o, --output-dir <dir>', 
 		'Output directory for the built files')
 	.parse(process.argv)
